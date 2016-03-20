@@ -46,6 +46,11 @@ public class MyGreep extends Greep
     // Remember: you cannot extend the Greep's memory. So:
     // no additional fields (other than final fields) allowed in this class!
     
+    int midX = 400;
+    int midY = 530;
+    int pileX = 114;
+    int pileY = 531;
+    
     /**
      * Default constructor. Do not remove.
      */
@@ -60,19 +65,16 @@ public class MyGreep extends Greep
     public void act()
     {
         super.act();   // do not delete! leave as first statement in act().
-        if (carryingTomato()) {
-            if(atShip()) {
-                dropTomato();
-            }
-            else {
-                turnHome();
-                move();
-            }
-        }
-        else {
-            randomWalk();
-            checkFood();
-        }
+        if (isAtShipWithTomato()) dropTomato();
+        
+        setFlag();
+        if (!getFlag(1) && !getFlag(2)) turnTowards(midX, midY);
+        if (!getFlag(1) && getFlag(2)) turnTowards(pileX, pileY);
+        if (getFlag(1) && !getFlag(2)) turnTowards(midX, midY);
+        if (getFlag(1) && getFlag(2)) turnHome();
+        
+       checkFood();
+       move();
     }
     
     /** 
@@ -95,10 +97,11 @@ public class MyGreep extends Greep
     {
         // check whether there's a tomato pile here
         TomatoPile tomatoes = getTomatoes();
-        if(tomatoes != null) {
+        if(tomatoes != null && !carryingTomato()) {
             loadTomato();
             // Note: this attempts to load a tomato onto *another* Greep. It won't
             // do anything if we are alone here.
+            turnTowards(tomatoes.getX(), tomatoes.getY());
         }
     }
 
@@ -108,6 +111,84 @@ public class MyGreep extends Greep
      */
     public String getName()
     {
-        return "Your name here";  // write your name here!
+        return "Soul Society!";  // write your name here!
+    }
+    
+    
+    
+    public boolean isAtShipWithTomato()
+    {
+        if (atShip() && carryingTomato()) return true;
+        return false;
+    }
+    
+    public boolean isAtShipWithoutTomato()
+    {
+        if (atShip() && !carryingTomato()) return true;
+        return false;
+    }
+    
+    //check if greeps are at a certain location
+    public boolean isAtXY (int X, int Y)
+    {
+        if (getX() == X && getY() == Y) return true;
+        return false;
+    }
+    
+    public boolean isAtXYWithTomato(int X, int Y)
+    {
+        if (isAtXY(X,Y) && carryingTomato()) return true;
+        return false;
+    }
+    
+    public boolean isAtXYWithoutTomato(int X, int Y)
+    {
+        if (isAtXY(X,Y) && !carryingTomato()) return true;
+        return false;
+    }
+    
+    
+    public boolean isInZoneAroundXY(int X, int Y)
+    {
+        if (getX()> X * 0.95 && getX() < X * 1.1 && getY() > Y* 0.95 && getY() < Y * 1.1) return true;
+        return false;
+    }
+    
+    public boolean isInZoneWithTomato(int X, int Y)
+    {
+        if (isInZoneAroundXY(X, Y) && carryingTomato()) return true;
+        return false;
+    }
+    
+    public boolean isInZoneWithoutTomato(int X, int Y)
+    {
+        if (isInZoneAroundXY(X, Y) && !carryingTomato()) return true;
+        return false;
+    }
+    
+    public void setFlag()
+    {
+        if (isAtShipWithoutTomato())
+        {
+            setFlag(1, false);
+            setFlag(2, false);
+        }
+        else if (isInZoneWithoutTomato(midX, midY))
+        {
+           setFlag(1, false);
+           setFlag(2, true);
+        }
+        else if (isInZoneWithoutTomato(pileX, pileY))
+        {
+           setFlag(1, true);
+           setFlag(2, false);
+        }
+        else if (isInZoneWithTomato(midX, midY))
+        {
+           setFlag(1, true);
+           setFlag(2, true);
+        }
+        
+    
     }
 }

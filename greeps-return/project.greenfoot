@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Sun Mar 20 13:48:52 MUT 2016
+#Sun Mar 20 14:46:42 MUT 2016
 target10.editor.width=900
 target2.width=80
 editor.fx.0.height=700
@@ -65,7 +65,7 @@ target5.name=SimpleGreep
 class.Greep.superclass=greenfoot.Actor
 class.ScoreBoard.superclass=greenfoot.Actor
 world.lastInstantiated=Earth
-mainWindow.width=1382
+mainWindow.width=1378
 readme.width=47
 target10.editor.y=0
 target9.name=Ship
@@ -85,7 +85,7 @@ dependency3.type=UsesDependency
 target6.type=AbstractTarget
 target2.typeParameters=
 target2.height=50
-editor.swing.0.height=700
+editor.swing.0.height=744
 dependency11.to=Timer
 target9.typeParameters=
 dependency11.from=Earth
@@ -106,10 +106,10 @@ dependency1.from=Greep
 target5.editor.y=0
 target5.editor.x=0
 mainWindow.y=-8
-editor.swing.0.y=0
+editor.swing.0.y=-8
 target5.showInterface=false
 mainWindow.x=-8
-editor.swing.0.x=0
+editor.swing.0.x=-8
 dependency19.from=MyGreep
 dependency16.to=Greep
 class.Smoke.superclass=greenfoot.Actor
@@ -121,7 +121,7 @@ target2.name=MyGreep
 dependency9.from=ScoreBoard
 readme.name=@README
 class.ScoreBoard.image=ScoreBoard.png
-editor.swing.0.width=700
+editor.swing.0.width=1382
 target6.naviview.expanded=true
 target6.name=Greep
 target9.height=50
