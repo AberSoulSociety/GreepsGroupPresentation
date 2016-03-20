@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Sun Mar 20 14:46:42 MUT 2016
+#Sun Mar 20 16:58:35 MUT 2016
 target10.editor.width=900
 target2.width=80
 editor.fx.0.height=700
@@ -105,7 +105,7 @@ target2.showInterface=false
 dependency1.from=Greep
 target5.editor.y=0
 target5.editor.x=0
-mainWindow.y=-8
+mainWindow.y=0
 editor.swing.0.y=-8
 target5.showInterface=false
 mainWindow.x=-8
@@ -205,7 +205,7 @@ target4.type=ClassTarget
 target8.width=90
 dependency8.to=Counter
 dependency19.type=UsesDependency
-simulation.speed=50
+simulation.speed=52
 target9.width=80
 target7.height=50
 dependency20.to=TomatoPile

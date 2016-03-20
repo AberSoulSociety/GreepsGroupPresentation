@@ -46,10 +46,12 @@ public class MyGreep extends Greep
     // Remember: you cannot extend the Greep's memory. So:
     // no additional fields (other than final fields) allowed in this class!
     
-    int midX = 400;
-    int midY = 530;
-    int pileX = 114;
-    int pileY = 531;
+    
+    int[] data = 
+    {
+        400,530,120,530,
+        400,60,670,60
+    };
     
     /**
      * Default constructor. Do not remove.
@@ -65,12 +67,15 @@ public class MyGreep extends Greep
     public void act()
     {
         super.act();   // do not delete! leave as first statement in act().
+        
+        if (getMemory(0) == 0 && getMemory(1) == 0 && getMemory(2) == 0 && getMemory(3) == 0)setGreep();
+        
         if (isAtShipWithTomato()) dropTomato();
         
         setFlag();
-        if (!getFlag(1) && !getFlag(2)) turnTowards(midX, midY);
-        if (!getFlag(1) && getFlag(2)) turnTowards(pileX, pileY);
-        if (getFlag(1) && !getFlag(2)) turnTowards(midX, midY);
+        if (!getFlag(1) && !getFlag(2)) turnTowards(data[getMemory(0)], data[getMemory(1)]);
+        if (!getFlag(1) && getFlag(2)) turnTowards(data[getMemory(2)], data[getMemory(3)]);
+        if (getFlag(1) && !getFlag(2)) turnTowards(data[getMemory(0)], data[getMemory(1)]);
         if (getFlag(1) && getFlag(2)) turnHome();
         
        checkFood();
@@ -128,29 +133,10 @@ public class MyGreep extends Greep
         return false;
     }
     
-    //check if greeps are at a certain location
-    public boolean isAtXY (int X, int Y)
-    {
-        if (getX() == X && getY() == Y) return true;
-        return false;
-    }
-    
-    public boolean isAtXYWithTomato(int X, int Y)
-    {
-        if (isAtXY(X,Y) && carryingTomato()) return true;
-        return false;
-    }
-    
-    public boolean isAtXYWithoutTomato(int X, int Y)
-    {
-        if (isAtXY(X,Y) && !carryingTomato()) return true;
-        return false;
-    }
-    
     
     public boolean isInZoneAroundXY(int X, int Y)
     {
-        if (getX()> X * 0.95 && getX() < X * 1.1 && getY() > Y* 0.95 && getY() < Y * 1.1) return true;
+        if (getX()> X -15 && getX() < X +15 && getY() > Y-15 && getY() < Y +15) return true;
         return false;
     }
     
@@ -173,22 +159,40 @@ public class MyGreep extends Greep
             setFlag(1, false);
             setFlag(2, false);
         }
-        else if (isInZoneWithoutTomato(midX, midY))
+        else if (isInZoneWithoutTomato(data[getMemory(0)], data[getMemory(1)]))
         {
            setFlag(1, false);
            setFlag(2, true);
         }
-        else if (isInZoneWithoutTomato(pileX, pileY))
+        else if (isInZoneWithoutTomato(data[getMemory(2)], data[getMemory(3)]))
         {
            setFlag(1, true);
            setFlag(2, false);
         }
-        else if (isInZoneWithTomato(midX, midY))
+        else if (isInZoneWithTomato(data[getMemory(0)], data[getMemory(1)]))
         {
            setFlag(1, true);
            setFlag(2, true);
         }
         
+    }
     
+    public void setGreep()
+    {
+        boolean chance = randomChance(50);
+        if (chance)
+        {
+            setMemory(0,0);
+            setMemory(1,1);
+            setMemory(2,2);
+            setMemory(3,3);
+        }
+        else
+        {
+          setMemory(0,4);
+          setMemory(1,5);
+          setMemory(2,6);
+          setMemory(3,7);
+        }
     }
 }
