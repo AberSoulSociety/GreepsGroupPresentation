@@ -49,8 +49,10 @@ public class MyGreep extends Greep
     
     int[] data = 
     {
-        400,530,120,530,
-        400,60,670,60
+        400, 530, 120, 530,
+        400, 60, 670, 60,
+        400, 50, 270, 40,
+        400, 550, 550, 540
     };
     
     /**
@@ -73,9 +75,9 @@ public class MyGreep extends Greep
         if (isAtShipWithTomato()) dropTomato();
         
         setFlag();
-        if (!getFlag(1) && !getFlag(2)) turnTowards(data[getMemory(0)], data[getMemory(1)]);
-        if (!getFlag(1) && getFlag(2)) turnTowards(data[getMemory(2)], data[getMemory(3)]);
-        if (getFlag(1) && !getFlag(2)) turnTowards(data[getMemory(0)], data[getMemory(1)]);
+        if (!getFlag(1) && !getFlag(2)) turnTowards(getMemory(0), getMemory(1));
+        if (!getFlag(1) && getFlag(2)) turnTowards(getMemory(2), getMemory(3));
+        if (getFlag(1) && !getFlag(2)) turnTowards(getMemory(0), getMemory(1));
         if (getFlag(1) && getFlag(2)) turnHome();
         
        checkFood();
@@ -136,7 +138,7 @@ public class MyGreep extends Greep
     
     public boolean isInZoneAroundXY(int X, int Y)
     {
-        if (getX()> X -15 && getX() < X +15 && getY() > Y-15 && getY() < Y +15) return true;
+        if (getX()> X -20 && getX() < X +20 && getY() > Y-20 && getY() < Y +20) return true;
         return false;
     }
     
@@ -159,17 +161,17 @@ public class MyGreep extends Greep
             setFlag(1, false);
             setFlag(2, false);
         }
-        else if (isInZoneWithoutTomato(data[getMemory(0)], data[getMemory(1)]))
+        else if (isInZoneWithoutTomato(getMemory(0), getMemory(1)))
         {
            setFlag(1, false);
            setFlag(2, true);
         }
-        else if (isInZoneWithoutTomato(data[getMemory(2)], data[getMemory(3)]))
+        else if (isInZoneWithoutTomato(getMemory(2), getMemory(3)))
         {
            setFlag(1, true);
            setFlag(2, false);
         }
-        else if (isInZoneWithTomato(data[getMemory(0)], data[getMemory(1)]))
+        else if (isInZoneWithTomato(getMemory(0), getMemory(1)))
         {
            setFlag(1, true);
            setFlag(2, true);
@@ -179,20 +181,38 @@ public class MyGreep extends Greep
     
     public void setGreep()
     {
-        boolean chance = randomChance(50);
-        if (chance)
+        boolean chance1 = randomChance(50);
+        boolean chance2 = randomChance(50);
+        boolean chance3 = randomChance(50);
+        boolean chance4 = randomChance(50);
+        boolean chance5 = randomChance(50);
+        if (chance1)
         {
-            setMemory(0,0);
-            setMemory(1,1);
-            setMemory(2,2);
-            setMemory(3,3);
+            setMemory(0,data[0]);
+            setMemory(1,data[1]);
+            setMemory(2,data[2]);
+            setMemory(3,data[3]);
+        }
+        else if (chance2)
+        {
+          setMemory(0,data[4]);
+          setMemory(1,data[5]);
+          setMemory(2,data[6]);
+          setMemory(3,data[7]);
+        } 
+        else if (chance3)
+        {
+          setMemory(0,data[8]);
+          setMemory(1,data[9]);
+          setMemory(2,data[10]);
+          setMemory(3,data[11]);
         }
         else
         {
-          setMemory(0,4);
-          setMemory(1,5);
-          setMemory(2,6);
-          setMemory(3,7);
+          setMemory(0,data[12]);
+          setMemory(1,data[13]);
+          setMemory(2,data[14]);
+          setMemory(3,data[15]); 
         }
     }
 }
