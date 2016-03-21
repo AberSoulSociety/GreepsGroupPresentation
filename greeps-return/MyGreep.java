@@ -47,7 +47,7 @@ public class MyGreep extends Greep
     // no additional fields (other than final fields) allowed in this class!
     
     
-    int[] data = 
+   /* int[] data =
     {   //Map Position
         400, 240, 1,
         400, 360, 2,
@@ -65,69 +65,79 @@ public class MyGreep extends Greep
         0,0,0,0,0,0,
 
         //Paths & Chance
-        400, 530, 100, 530, 50,
-        400, 60, 680, 60, 50,
-        400, 50, 260, 40, 50,
-        400, 550, 560, 540, 100,
+        //1
+        400, 50, 260, 40, 15,    //1
+        400, 550, 560, 540, 18,  //4
+        400, 60, 680, 60, 46,    //2
+        400, 530, 100, 530, 100, //3
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0,
         
-        400, 60, 680, 60, 50,
-        400, 530, 100, 530, 50,
-        400, 550, 560, 540, 50,
-        400, 50, 260, 40, 100,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        
-        
-        
-        290, 400, 400, 300, 50,
-        100, 175, 100, 50, 50,
-        100, 400, 100, 500, 100,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        
-        510, 200, 400, 300, 50,
-        700, 175, 700, 50, 50,
-        700, 400, 700, 500, 100,
-        0, 0, 0, 0, 0,
+        //2
+        400, 550, 560, 540, 15,  //4
+        400, 50, 260, 40, 18,    //1
+        400, 530, 100, 530, 46,  //3
+        400, 60, 680, 60, 100,   //2
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0,
         
         
+        //3
+        100, 175, 100, 50, 25,   //1
+        100, 400, 100, 500, 33,  //4
+        290, 400, 400, 300, 100, //3
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
         
-        350, 281, 400, 220, 50,
-        275, 300, 400, 440, 50,
-        420, 130, 40, 50, 50,
-        420, 130, 760, 50, 50,
-        90, 530, 50, 550, 50,
-        380, 190, 750, 550, 50,
-        
-        480, 270, 400, 220, 50,
-        520, 320, 400, 440, 50,
-        380, 140, 760, 50, 50,
-        385, 140, 40, 50, 50,
-        420, 195, 50, 550, 50,
-        710, 530, 750, 550, 50,
+        //4
+        700, 175, 700, 50, 25,   //2
+        700, 400, 700, 500, 33,  //5
+        510, 200, 400, 300, 100, //3
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
         
         
-        90, 240, 385, 52, 50,
-        10, 265, 404, 523, 100,
+        //5
+        50, 550, 50, 550, 100, //23,    //4
+        
+        420, 130, 760, 50, 10,   //2
+        380, 190, 750, 550, 11,  //6
+        420, 130, 40, 50, 19,    //1
+        
+        350, 281, 400, 220, 50,  //3
+        275, 300, 400, 440, 100, //5
+
+        //6
+        710, 530, 750, 550, 100, //23,  //6
+        
+        385, 140, 40, 50, 10,    //1
+        420, 195, 50, 550, 11,   //4
+        380, 140, 760, 50, 19,   //2
+        
+        480, 270, 400, 220, 50,  //3
+        520, 320, 400, 440, 100, //5
+      
+        
+        //7
+        90, 240, 385, 52, 50,    //1
+        10, 265, 404, 523, 100,  //2
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0,
         
-        730, 240, 385, 52, 50,
-        790, 265, 404, 523, 100,
+        //8
+        730, 240, 385, 52, 50,   //1
+        790, 265, 404, 523, 100, //2
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0
         
     };
-    
+    */
     /**
      * Default constructor. Do not remove.
      */
@@ -265,40 +275,40 @@ public class MyGreep extends Greep
     public void setGreep()
     {
         int block = 30 ;
-        if (randomChance(data[(getMemory(0) * block) + 4]))
+        if (randomChance(getShipData()[(getMemory(0) * block) + 4]))
         {
-            setMemory(1, mergeXY(data[(getMemory(0)* block) +0],data[(getMemory(0)* block) +1]));
-            setMemory(2, mergeXY(data[(getMemory(0)* block) +2],data[(getMemory(0)* block) +3]));
+            setMemory(1, mergeXY(getShipData()[(getMemory(0)* block) +0],getShipData()[(getMemory(0)* block) +1]));
+            setMemory(2, mergeXY(getShipData()[(getMemory(0)* block) +2],getShipData()[(getMemory(0)* block) +3]));
         }
-        else if (randomChance(data[(getMemory(0) * block) +  9]))
+        else if (randomChance(getShipData()[(getMemory(0) * block) +  9]))
         {
-          setMemory(1, mergeXY(data[(getMemory(0)* block) +5],data[(getMemory(0)* block) +6]));
-          setMemory(2, mergeXY(data[(getMemory(0)* block) +7],data[(getMemory(0)* block) +8]));
+          setMemory(1, mergeXY(getShipData()[(getMemory(0)* block) +5],getShipData()[(getMemory(0)* block) +6]));
+          setMemory(2, mergeXY(getShipData()[(getMemory(0)* block) +7],getShipData()[(getMemory(0)* block) +8]));
         } 
-        else if (randomChance(data[(getMemory(0)* block) + 14]))
+        else if (randomChance(getShipData()[(getMemory(0)* block) + 14]))
         {
-          setMemory(1, mergeXY(data[(getMemory(0)* block) +10],data[(getMemory(0)* block) +11]));
-          setMemory(2, mergeXY(data[(getMemory(0)* block) +12],data[(getMemory(0)* block) +13]));
+          setMemory(1, mergeXY(getShipData()[(getMemory(0)* block) +10],getShipData()[(getMemory(0)* block) +11]));
+          setMemory(2, mergeXY(getShipData()[(getMemory(0)* block) +12],getShipData()[(getMemory(0)* block) +13]));
         }
-        else if (randomChance(data[(getMemory(0)* block) + 19]))
+        else if (randomChance(getShipData()[(getMemory(0)* block) + 19]))
         {
-          setMemory(1,mergeXY(data[(getMemory(0)* block) +15],data[(getMemory(0)* block) +16]));
-          setMemory(2,mergeXY(data[(getMemory(0)* block) +17],data[(getMemory(0)* block) +18])); 
+          setMemory(1,mergeXY(getShipData()[(getMemory(0)* block) +15],getShipData()[(getMemory(0)* block) +16]));
+          setMemory(2,mergeXY(getShipData()[(getMemory(0)* block) +17],getShipData()[(getMemory(0)* block) +18])); 
         } 
-        else if (randomChance(data[(getMemory(0)* block) +24]))
+        else if (randomChance(getShipData()[(getMemory(0)* block) +24]))
         {
-          setMemory(1,mergeXY(data[(getMemory(0)* block) +20],data[(getMemory(0)* block) +21]));
-          setMemory(2,mergeXY(data[(getMemory(0)* block) +22],data[(getMemory(0)* block) +23])); 
+          setMemory(1,mergeXY(getShipData()[(getMemory(0)* block) +20],getShipData()[(getMemory(0)* block) +21]));
+          setMemory(2,mergeXY(getShipData()[(getMemory(0)* block) +22],getShipData()[(getMemory(0)* block) +23])); 
         }
-        else if (randomChance(data[(getMemory(0)* block) +29]))
+        else if (randomChance(getShipData()[(getMemory(0)* block) +29]))
         {
-          setMemory(1,mergeXY(data[(getMemory(0)* block) +25],data[(getMemory(0)* block) +26]));
-          setMemory(2,mergeXY(data[(getMemory(0)* block) +27],data[(getMemory(0)* block) +28])); 
+          setMemory(1,mergeXY(getShipData()[(getMemory(0)* block) +25],getShipData()[(getMemory(0)* block) +26]));
+          setMemory(2,mergeXY(getShipData()[(getMemory(0)* block) +27],getShipData()[(getMemory(0)* block) +28])); 
         } 
         else
         {
-            setMemory(1, mergeXY(data[(getMemory(0)* block) +0],data[(getMemory(0)* block) +1]));
-            setMemory(2, mergeXY(data[(getMemory(0)* block) +2],data[(getMemory(0)* block) +3]));
+            setMemory(1, mergeXY(getShipData()[(getMemory(0)* block) +0],getShipData()[(getMemory(0)* block) +1]));
+            setMemory(2, mergeXY(getShipData()[(getMemory(0)* block) +2],getShipData()[(getMemory(0)* block) +3]));
         }
     }
     
@@ -322,6 +332,6 @@ public class MyGreep extends Greep
     public void figurePosition()
     {   
         for (int index = 0; index <24; index += 3)
-            if(isInZoneAroundXY(data[index],data[index+1])) {setMemory(0, data[index+2]); return;}
+            if(isInZoneAroundXY(getShipData()[index],getShipData()[index+1])) {setMemory(0, getShipData()[index+2]); return;}
     }
 }
