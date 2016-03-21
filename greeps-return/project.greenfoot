@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Sun Mar 20 22:09:35 MUT 2016
+#Mon Mar 21 19:19:34 MUT 2016
 target10.editor.width=900
 target2.width=80
 editor.fx.0.height=700
@@ -205,7 +205,7 @@ target4.type=ClassTarget
 target8.width=90
 dependency8.to=Counter
 dependency19.type=UsesDependency
-simulation.speed=51
+simulation.speed=54
 target9.width=80
 target7.height=50
 dependency20.to=TomatoPile

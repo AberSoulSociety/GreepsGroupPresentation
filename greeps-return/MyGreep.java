@@ -68,17 +68,63 @@ public class MyGreep extends Greep
         400, 530, 120, 530, 50,
         400, 60, 670, 60, 50,
         400, 50, 270, 40, 50,
-        400, 550, 550, 540, 50,
-        400, 530, 120, 530, 50,
+        400, 550, 550, 540, 100,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        
         400, 60, 670, 60, 50,
+        400, 530, 120, 530, 50,
+        400, 550, 550, 540, 50,
+        400, 50, 270, 40, 100,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
         
         
-        400, 60, 670, 60, 50,
-        400, 530, 120, 530, 50,
-        400, 550, 550, 540, 50,
-        400, 50, 270, 40, 50,
-        400, 60, 670, 60, 50,
-        400, 530, 120, 530, 50
+        
+        290, 400, 400, 300, 50,
+        100, 175, 100, 50, 50,
+        100, 400, 100, 500, 100,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        
+        510, 200, 400, 300, 50,
+        700, 175, 700, 50, 50,
+        700, 400, 700, 500, 100,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        
+        
+        
+        350, 281, 400, 220, 50,
+        275, 300, 400, 440, 50,
+        420, 130, 40, 50, 50,
+        420, 130, 760, 50, 50,
+        90, 530, 50, 550, 50,
+        380, 190, 750, 550, 50,
+        
+        480, 270, 400, 220, 50,
+        520, 320, 400, 440, 50,
+        380, 140, 760, 50, 50,
+        385, 140, 40, 50, 50,
+        420, 195, 50, 550, 50,
+        710, 530, 750, 550, 50,
+        
+        
+        90, 240, 385, 52, 50,
+        10, 265, 404, 523, 100,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        
+        730, 240, 385, 52, 50,
+        790, 265, 404, 523, 100,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0
         
     };
     
@@ -99,7 +145,7 @@ public class MyGreep extends Greep
         
          if (isAtShipWithTomato()) dropTomato();
         //figurePosition();
-         if (getMemory(0) == 0)figurePosition();
+         if (getMemory(0) == 0 && atShip())figurePosition();
         
          if(atShip()) setGreep();
         
@@ -108,7 +154,15 @@ public class MyGreep extends Greep
         if (!getFlag(1) && !getFlag(2)) turnTowards(resolveX(getMemory(1)), resolveY(getMemory(1)));
         if (!getFlag(1) && getFlag(2)) turnTowards(resolveX(getMemory(2)), resolveY(getMemory(2)));
         if (getFlag(1) && !getFlag(2)) turnTowards(resolveX(getMemory(1)), resolveY(getMemory(1)));
-        if ((getFlag(1) && getFlag(2)) || getMemory(1)==0 || getMemory(2)==0) turnHome();
+        if ((getFlag(1) && getFlag(2)) || getMemory(1)==0 || getMemory(2)==0 || getMemory(0)==0) turnHome();
+        
+        //copied from simple
+        if (atWater() || moveWasBlocked()) {
+            // If we were blocked, try to move somewhere else
+            int r = getRotation();
+            setRotation (r + Greenfoot.getRandomNumber(2) * 180 - 90);
+            move();
+        }        
         
        checkFood();
        move();
@@ -211,14 +265,13 @@ public class MyGreep extends Greep
     
     public void setGreep()
     {
-        final int block = 30;
-        
-        if (randomChance(data[(getMemory(0)* block) + 4]))
+        int block = 30 ;
+        if (randomChance(data[(getMemory(0) * block) + 4]))
         {
             setMemory(1, mergeXY(data[(getMemory(0)* block) +0],data[(getMemory(0)* block) +1]));
             setMemory(2, mergeXY(data[(getMemory(0)* block) +2],data[(getMemory(0)* block) +3]));
         }
-        else if (randomChance(data[(getMemory(0)* block) + 9]))
+        else if (randomChance(data[(getMemory(0) * block) +  9]))
         {
           setMemory(1, mergeXY(data[(getMemory(0)* block) +5],data[(getMemory(0)* block) +6]));
           setMemory(2, mergeXY(data[(getMemory(0)* block) +7],data[(getMemory(0)* block) +8]));
@@ -233,32 +286,37 @@ public class MyGreep extends Greep
           setMemory(1,mergeXY(data[(getMemory(0)* block) +15],data[(getMemory(0)* block) +16]));
           setMemory(2,mergeXY(data[(getMemory(0)* block) +17],data[(getMemory(0)* block) +18])); 
         } 
-        else if (randomChance(24))
+        else if (randomChance(data[(getMemory(0)* block) +24]))
         {
           setMemory(1,mergeXY(data[(getMemory(0)* block) +20],data[(getMemory(0)* block) +21]));
           setMemory(2,mergeXY(data[(getMemory(0)* block) +22],data[(getMemory(0)* block) +23])); 
         }
-        else
+        else if (randomChance(data[(getMemory(0)* block) +29]))
         {
           setMemory(1,mergeXY(data[(getMemory(0)* block) +25],data[(getMemory(0)* block) +26]));
           setMemory(2,mergeXY(data[(getMemory(0)* block) +27],data[(getMemory(0)* block) +28])); 
+        } 
+        else
+        {
+            setMemory(1, mergeXY(data[(getMemory(0)* block) +0],data[(getMemory(0)* block) +1]));
+            setMemory(2, mergeXY(data[(getMemory(0)* block) +2],data[(getMemory(0)* block) +3]));
         }
     }
     
     
     public int mergeXY(int X, int Y)
     {
-        return (800*X) + Y;
+        return (600*X) + Y;
     }
     
     public int resolveX(int code)
     {
-        return code/800;
+        return code/600;
     }
     
     public int resolveY(int code)
     {
-        return code%800;
+        return code%600;
     }
     
     
